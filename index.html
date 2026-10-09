@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Free field tools, member discounts, business templates and marketing help for Latino Built contractors.">
+<title>Latino Built Pro Source</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: matches Aaron's field tools (Field Estimator, Field Guide, Floor Plan Tool). Green top bar, sticky section tabs, 960px column of cards. Light theme only, same as the tools. */
+:root{
+  --brand:#12211B; --brand-mid:#193B2D; --brand-light:#24513E; --accent:#FF7A1A; --accent-soft:#FFB36B;
+  --bg:#F4F6F3; --surface:#FFFFFF; --surface2:#F8FAF8; --border:#DEE5DF; --border-dark:#C8D3CA;
+  --text:#14211B; --text2:#536158; --text3:#849087; --on-brand:#FFFFFF; --on-brand2:#C8D3CA;
+  --sans:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'DM Mono',ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:radial-gradient(circle at 90% -10%,rgba(255,122,26,.10),transparent 480px),radial-gradient(circle at 0% 18%,rgba(38,104,75,.08),transparent 544px),var(--bg);color:var(--text);font:16px/1.55 var(--sans)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent-soft);outline-offset:3px;border-radius:8px}
+
+.topbar{background:rgba(18,33,27,.96);color:var(--on-brand);box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.topbar .in{max-width:960px;margin:0 auto;padding-inline:16px;min-height:56px;display:flex;align-items:center;gap:12px}
+.mono-mark{font-family:var(--mono);font-size:.72rem;font-weight:500;border:1px solid rgba(255,255,255,.2);border-radius:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex:none}
+.tt{font-weight:800;font-size:.95rem;letter-spacing:-.02em;line-height:1.2}
+.ts{font-size:.68rem;color:var(--on-brand2)}
+#lang{margin-left:auto;font:600 13px var(--sans);background:transparent;color:var(--on-brand);border:1px solid #536158;border-radius:12px;min-height:40px;padding:8px 14px;cursor:pointer}
+#lang:hover{border-color:var(--accent)}
+
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--brand-mid);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs .in{max-width:960px;margin:0 auto;padding-inline:8px;display:flex;gap:2px}
+.tabs a{color:var(--on-brand2);text-decoration:none;font-size:.82rem;font-weight:600;padding:12px 13px;white-space:nowrap;border-bottom:3px solid transparent}
+.tabs a:hover,.tabs a.on{color:var(--on-brand);border-bottom-color:var(--accent)}
+
+main{max-width:960px;margin:0 auto;padding:20px 16px 64px;display:grid;gap:28px}
+
+.intro{background:var(--brand);color:var(--on-brand);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.intro::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:linear-gradient(145deg,#FF933F,#F16600);opacity:.22}
+.intro h1{font-size:clamp(26px,5vw,36px);line-height:1.1;letter-spacing:-.02em;margin:0;max-width:20ch;text-wrap:balance;position:relative}
+.intro p{color:var(--on-brand2);margin:10px 0 0;max-width:58ch;position:relative}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none;position:relative}
+.chips li{font-family:var(--mono);font-size:12px;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:4px 11px}
+
+.sec{scroll-margin-top:60px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.sec-head h2{font-size:22px;letter-spacing:-.01em;margin:0}
+.sec-head p{margin:2px 0 0;color:var(--text2);font-size:14px;max-width:60ch}
+.status{font-family:var(--mono);font-size:11px;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.live{background:#E4F0E8;color:var(--brand-light)}
+.soon{background:#FFF0E3;color:#A44700}
+
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.grid.wide{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(20,33,27,.08);display:flex;flex-direction:column;gap:8px;min-width:0}
+.card h3{font-size:17px;margin:0;line-height:1.25}
+.card p{margin:0;color:var(--text2);font-size:14px;line-height:1.5}
+.card .k{font-family:var(--mono);font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
+a.card{text-decoration:none;transition:border-color .15s,transform .15s}
+a.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.ico{width:40px;height:40px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--brand-light)}
+.ico svg{width:22px;height:22px}
+.go{margin-top:auto;padding-top:6px;font-weight:700;font-size:14px;color:var(--brand-mid)}
+.card.dim{background:var(--surface2);box-shadow:none}
+.card.flag{border-left:4px solid var(--accent)}
+.card ul{margin:0;padding-left:18px;font-size:14px;color:var(--text2)}
+
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--surface);border:1.5px solid var(--border);border-left:4px solid var(--accent);border-radius:12px;padding:14px 16px;margin-top:12px}
+.cta strong{display:block;font-size:15px}
+.cta span{font-size:14px;color:var(--text2)}
+
+.contact{background:var(--brand-mid);color:var(--on-brand);border-radius:16px;padding:22px;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.contact h2{margin:0 0 4px;font-size:22px}
+.contact p{margin:0;color:var(--on-brand2);max-width:50ch;font-size:15px}
+.lines{display:grid;gap:8px}
+.line{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.line code{font-family:var(--mono);font-size:15px;user-select:all}
+.copy{font:600 12px var(--sans);background:transparent;color:var(--on-brand);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:6px 12px;cursor:pointer}
+.copy:hover{border-color:var(--accent)}
+footer{max-width:960px;margin:0 auto;padding:0 16px 32px;color:var(--text3);font-size:13px}
+@media (prefers-reduced-motion:reduce){a.card{transition:none}a.card:hover{transform:none}html{scroll-behavior:auto}}
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="in">
+  <div class="mono-mark" aria-hidden="true">PS</div>
+  <div><div class="tt">Pro Source</div><div class="ts" data-en="Latino Built member resources" data-es="Recursos para miembros de Latino Built">Latino Built member resources</div></div>
+  <button id="lang" type="button" aria-label="Change language">Español</button>
+</div></header>
+
+<nav class="tabs" aria-label="Sections"><div class="in">
+  <a href="#tools" data-en="Tools" data-es="Herramientas">Tools</a>
+  <a href="#discounts" data-en="Discounts" data-es="Descuentos">Discounts</a>
+  <a href="#business" data-en="Business sheets" data-es="Hojas de negocio">Business sheets</a>
+  <a href="#marketing" data-en="Marketing" data-es="Mercadeo">Marketing</a>
+  <a href="#programs" data-en="Programs" data-es="Programas">Programs</a>
+  <a href="#resources" data-en="Resources" data-es="Recursos">Resources</a>
+</div></nav>
+
+<main>
+<div class="intro">
+  <h1 data-en="Everything you need to run jobs and grow your business" data-es="Todo lo que necesitas para hacer trabajos y crecer tu negocio">Everything you need to run jobs and grow your business</h1>
+  <p data-en="Free field tools, member discounts, business templates, and marketing help for Latino Built contractors. Open it on your phone, no account needed." data-es="Herramientas de campo gratis, descuentos para miembros, plantillas de negocio y ayuda con mercadeo para contratistas de Latino Built. Ábrelo en tu teléfono, sin cuenta.">Free field tools, member discounts, business templates, and marketing help for Latino Built contractors. Open it on your phone, no account needed.</p>
+  <ul class="chips">
+    <li data-en="Free for members" data-es="Gratis para miembros">Free for members</li>
+    <li data-en="No login" data-es="Sin registro">No login</li>
+    <li data-en="Works on phone" data-es="Funciona en el teléfono">Works on phone</li>
+    <li>English / Español</li>
+  </ul>
+</div>
+
+<section class="sec" id="tools">
+  <div class="sec-head"><div><h2 data-en="Field tools" data-es="Herramientas de campo">Field tools</h2><p data-en="Use them on the job. Your data stays on your device." data-es="Úsalas en el trabajo. Tus datos se quedan en tu dispositivo.">Use them on the job. Your data stays on your device.</p></div><span class="status live" data-en="Live" data-es="Disponible">Live</span></div>
+  <div class="grid">
+    <a class="card" href="https://milepayreport.com/" target="_blank" rel="noopener">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19 10 5M20 19 14 5M12 7v2M12 12v2M12 17v2"/></svg></div>
+      <h3>MilePay Report</h3><p data-en="Track mileage and build reimbursement reports." data-es="Registra millaje y crea reportes de reembolso.">Track mileage and build reimbursement reports.</p>
+      <span class="go" data-en="Open →" data-es="Abrir →">Open →</span></a>
+    <a class="card" href="https://aaronoso08.github.io/Fieldestimator/" target="_blank" rel="noopener">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M8 18h8"/></svg></div>
+      <h3>Field Estimator</h3><p data-en="Job costs, estimates, and invoices." data-es="Costos de trabajo, estimados y facturas.">Job costs, estimates, and invoices.</p>
+      <span class="go" data-en="Open →" data-es="Abrir →">Open →</span></a>
+    <a class="card" href="https://aaronoso08.github.io/FloorPlanTool/" target="_blank" rel="noopener">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h18v16H3zM12 4v7M12 15v5M3 12h5M12 12h9"/></svg></div>
+      <h3>Floor Plan Tool</h3><p data-en="Room sketches, dimensions, and equipment." data-es="Bocetos de cuartos, medidas y equipos.">Room sketches, dimensions, and equipment.</p>
+      <span class="go" data-en="Open →" data-es="Abrir →">Open →</span></a>
+    <a class="card" href="https://aaronoso08.github.io/FieldGuide/index.html" target="_blank" rel="noopener">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7M8 11h5"/></svg></div>
+      <h3>Field Guide</h3><p data-en="Home components and English/Spanish field vocabulary." data-es="Componentes de la casa y vocabulario de campo en inglés y español.">Home components and English/Spanish field vocabulary.</p>
+      <span class="go" data-en="Open →" data-es="Abrir →">Open →</span></a>
+  </div>
+</section>
+
+<section class="sec" id="discounts">
+  <div class="sec-head"><div><h2 data-en="Member discounts" data-es="Descuentos para miembros">Member discounts</h2><p data-en="Savings from partner companies and distributors, only for Latino Built members." data-es="Ahorros de compañías aliadas y distribuidores, solo para miembros de Latino Built.">Savings from partner companies and distributors, only for Latino Built members.</p></div><span class="status soon" data-en="Launching soon" data-es="Muy pronto">Launching soon</span></div>
+  <div class="grid">
+    <div class="card dim"><span class="k" data-en="Category" data-es="Categoría">Category</span><h3 data-en="Tools and equipment" data-es="Herramientas y equipo">Tools and equipment</h3><p data-en="Hand tools, power tools, and test equipment." data-es="Herramientas de mano, eléctricas y equipo de prueba.">Hand tools, power tools, and test equipment.</p></div>
+    <div class="card dim"><span class="k" data-en="Category" data-es="Categoría">Category</span><h3 data-en="Distributors and supply" data-es="Distribuidores y suministros">Distributors and supply</h3><p data-en="HVAC, insulation, and building materials." data-es="HVAC, aislamiento y materiales de construcción.">HVAC, insulation, and building materials.</p></div>
+    <div class="card dim"><span class="k" data-en="Category" data-es="Categoría">Category</span><h3 data-en="Software and services" data-es="Software y servicios">Software and services</h3><p data-en="Business software, insurance, and work gear." data-es="Software de negocio, seguros y ropa de trabajo.">Business software, insurance, and work gear.</p></div>
+    <div class="card dim"><span class="k" data-en="Category" data-es="Categoría">Category</span><h3 data-en="Training and certification" data-es="Capacitación y certificación">Training and certification</h3><p data-en="Reduced cost classes and exam prep." data-es="Clases y preparación de exámenes a menor costo.">Reduced cost classes and exam prep.</p></div>
+  </div>
+  <div class="cta"><div><strong data-en="Are you a company or distributor?" data-es="¿Eres una compañía o distribuidor?">Are you a company or distributor?</strong><span data-en="Offer a member discount and reach Latino contractors across Oregon and SW Washington." data-es="Ofrece un descuento a miembros y llega a contratistas latinos en Oregon y el suroeste de Washington.">Offer a member discount and reach Latino contractors across Oregon and SW Washington.</span></div><a href="#contact" class="go" data-en="Become a partner →" data-es="Hazte aliado →">Become a partner →</a></div>
+</section>
+
+<section class="sec" id="business">
+  <div class="sec-head"><div><h2 data-en="Business spreadsheets" data-es="Hojas de cálculo de negocio">Business spreadsheets</h2><p data-en="Ready to use Excel templates to run jobs, track money, and stay organized." data-es="Plantillas de Excel listas para manejar trabajos, controlar dinero y mantenerte organizado.">Ready to use Excel templates to run jobs, track money, and stay organized.</p></div><span class="status soon" data-en="Coming soon" data-es="Próximamente">Coming soon</span></div>
+  <div class="grid">
+    <div class="card dim"><span class="k">.xlsx</span><h3 data-en="Job tracker" data-es="Control de trabajos">Job tracker</h3><p data-en="Every job from lead to paid in one sheet." data-es="Cada trabajo desde el contacto hasta el pago en una hoja.">Every job from lead to paid in one sheet.</p></div>
+    <div class="card dim"><span class="k">.xlsx</span><h3 data-en="Project budget" data-es="Presupuesto de proyecto">Project budget</h3><p data-en="Materials, labor, and margin for each project." data-es="Materiales, mano de obra y margen por proyecto.">Materials, labor, and margin for each project.</p></div>
+    <div class="card dim"><span class="k">.xlsx</span><h3 data-en="Job profit calculator" data-es="Calculadora de ganancia">Job profit calculator</h3><p data-en="See what you really make before you quote." data-es="Mira lo que realmente ganas antes de cotizar.">See what you really make before you quote.</p></div>
+    <div class="card dim"><span class="k">.xlsx</span><h3 data-en="Materials and order list" data-es="Lista de materiales y pedidos">Materials and order list</h3><p data-en="Plan purchases and track supplier orders." data-es="Planea compras y controla pedidos.">Plan purchases and track supplier orders.</p></div>
+    <div class="card dim"><span class="k">.xlsx</span><h3 data-en="Customer list" data-es="Lista de clientes">Customer list</h3><p data-en="Contacts, past jobs, and follow ups." data-es="Contactos, trabajos pasados y seguimientos.">Contacts, past jobs, and follow ups.</p></div>
+    <div class="card dim"><span class="k">.xlsx</span><h3 data-en="Monthly cash flow" data-es="Flujo de caja mensual">Monthly cash flow</h3><p data-en="Money in, money out, and what's left." data-es="Entradas, salidas y lo que queda.">Money in, money out, and what's left.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="marketing">
+  <div class="sec-head"><div><h2 data-en="Marketing and social media" data-es="Mercadeo y redes sociales">Marketing and social media</h2><p data-en="Simple tools to get your business seen and win more jobs." data-es="Herramientas sencillas para que vean tu negocio y ganes más trabajos.">Simple tools to get your business seen and win more jobs.</p></div><span class="status soon" data-en="Coming soon" data-es="Próximamente">Coming soon</span></div>
+  <div class="grid">
+    <div class="card dim"><h3 data-en="30 day content planner" data-es="Planificador de contenido de 30 días">30 day content planner</h3><p data-en="What to post and when, one month at a time." data-es="Qué publicar y cuándo, un mes a la vez.">What to post and when, one month at a time.</p></div>
+    <div class="card dim"><h3 data-en="Before and after photo guide" data-es="Guía de fotos antes y después">Before and after photo guide</h3><p data-en="Take job photos that sell your work." data-es="Toma fotos de trabajos que venden tu servicio.">Take job photos that sell your work.</p></div>
+    <div class="card dim"><h3 data-en="Caption templates" data-es="Plantillas de texto para publicaciones">Caption templates</h3><p data-en="Ready to edit posts in English and Spanish." data-es="Publicaciones listas para editar en inglés y español.">Ready to edit posts in English and Spanish.</p></div>
+    <div class="card dim"><h3 data-en="Google and review setup" data-es="Perfil de Google y reseñas">Google and review setup</h3><p data-en="Get found locally and collect customer reviews." data-es="Aparece en búsquedas locales y junta reseñas.">Get found locally and collect customer reviews.</p></div>
+    <div class="card dim"><h3 data-en="Marketing planner" data-es="Planificador de mercadeo">Marketing planner</h3><p data-en="Goals, budget, and a simple plan for the year." data-es="Metas, presupuesto y un plan sencillo para el año.">Goals, budget, and a simple plan for the year.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="programs">
+  <div class="sec-head"><div><h2 data-en="Program quick reference" data-es="Referencia rápida de programas">Program quick reference</h2><p data-en="Programs Latino Built can help you work with." data-es="Programas en los que Latino Built te puede ayudar.">Programs Latino Built can help you work with.</p></div></div>
+  <div class="grid wide">
+    <div class="card flag"><span class="k" data-en="Enrollment opens Oct 12, 2026" data-es="Inscripción abre 12 oct 2026">Enrollment opens Oct 12, 2026</span><h3>HOMES / HEAR</h3><p data-en="Oregon state home energy rebates through Energy Trust of Oregon in PGE and Pacific Power areas. Contact us for help enrolling." data-es="Reembolsos estatales de energía en Oregon por medio de Energy Trust of Oregon en áreas de PGE y Pacific Power. Contáctanos para ayuda con la inscripción.">Oregon state home energy rebates through Energy Trust of Oregon in PGE and Pacific Power areas. Contact us for help enrolling.</p></div>
+    <div class="card"><span class="k" data-en="Active" data-es="Activo">Active</span><h3>CPF</h3><p data-en="Incentive program with submissions coordinated through Latino Built. Ask about eligibility before you quote." data-es="Programa de incentivos con envíos coordinados por Latino Built. Pregunta sobre elegibilidad antes de cotizar.">Incentive program with submissions coordinated through Latino Built. Ask about eligibility before you quote.</p></div>
+    <div class="card"><span class="k" data-en="Active" data-es="Activo">Active</span><h3>HHGP</h3><p data-en="Healthy Homes program. Latino Built completes assessments and coordinates contractor work." data-es="Programa de Hogares Saludables. Latino Built hace las evaluaciones y coordina el trabajo de contratistas.">Healthy Homes program. Latino Built completes assessments and coordinates contractor work.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="resources">
+  <div class="sec-head"><div><h2 data-en="More resources" data-es="Más recursos">More resources</h2><p data-en="Guides and checklists to help you grow." data-es="Guías y listas para ayudarte a crecer.">Guides and checklists to help you grow.</p></div><span class="status soon" data-en="Coming soon" data-es="Próximamente">Coming soon</span></div>
+  <div class="grid">
+    <div class="card dim"><h3 data-en="Which program fits?" data-es="¿Qué programa aplica?">Which program fits?</h3><p data-en="Match the job to the right incentive." data-es="Encuentra el incentivo correcto para cada trabajo.">Match the job to the right incentive.</p></div>
+    <div class="card dim"><h3 data-en="Submission checklists" data-es="Listas para envíos">Submission checklists</h3><p data-en="Paperwork, photos, and common rejection reasons." data-es="Papeles, fotos y razones comunes de rechazo.">Paperwork, photos, and common rejection reasons.</p></div>
+    <div class="card dim"><h3 data-en="Licensing and certifications" data-es="Licencias y certificaciones">Licensing and certifications</h3><p data-en="CCB, trade ally, and BPI paths." data-es="Rutas de CCB, Trade Ally y BPI.">CCB, trade ally, and BPI paths.</p></div>
+    <div class="card dim"><h3 data-en="Business support" data-es="Apoyo para negocios">Business support</h3><p data-en="COBID certification and small business help." data-es="Certificación COBID y ayuda para pequeños negocios.">COBID certification and small business help.</p></div>
+    <div class="card dim"><h3 data-en="Client handouts" data-es="Hojas para clientes">Client handouts</h3><p data-en="Bilingual handouts to explain the work to homeowners." data-es="Hojas bilingües para explicar el trabajo a los dueños.">Bilingual handouts to explain the work to homeowners.</p></div>
+    <div class="card dim"><h3 data-en="Events and trainings" data-es="Eventos y capacitaciones">Events and trainings</h3><p data-en="Upcoming classes and member meetups." data-es="Próximas clases y reuniones de miembros.">Upcoming classes and member meetups.</p></div>
+  </div>
+</section>
+
+<div class="contact sec" id="contact">
+  <div><h2 data-en="Questions, ideas, or partnerships" data-es="Preguntas, ideas o alianzas">Questions, ideas, or partnerships</h2><p data-en="Tell us what would save you time or money. Pro Source grows from member feedback." data-es="Dinos qué te ahorraría tiempo o dinero. Pro Source crece con las ideas de los miembros.">Tell us what would save you time or money. Pro Source grows from member feedback.</p></div>
+  <div class="lines">
+    <div class="line"><code id="c-email">aaron@latinobuilt.org</code><button class="copy" type="button" data-copy="c-email" data-en="Copy" data-es="Copiar">Copy</button></div>
+    <div class="line"><code id="c-phone">971-277-0532</code><button class="copy" type="button" data-copy="c-phone" data-en="Copy" data-es="Copiar">Copy</button></div>
+  </div>
+</div>
+</main>
+<footer data-en="Pro Source is a pilot for Latino Built member contractors." data-es="Pro Source es un piloto para contratistas miembros de Latino Built.">Pro Source is a pilot for Latino Built member contractors.</footer>
+
+<script>
+(function(){
+  var lang='en',btn=document.getElementById('lang');
+  function setLang(l){
+    lang=l;document.documentElement.lang=l;
+    document.querySelectorAll('[data-'+l+']').forEach(function(el){el.textContent=el.getAttribute('data-'+l)});
+    btn.textContent=l==='en'?'Español':'English';
+    try{localStorage.setItem('ps-lang',l)}catch(e){}
+  }
+  btn.addEventListener('click',function(){setLang(lang==='en'?'es':'en')});
+  var s=null;try{s=localStorage.getItem('ps-lang')}catch(e){}
+  if(s==='es')setLang('es');
+  var tabs=[].slice.call(document.querySelectorAll('.tabs a'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){tabs.forEach(function(t){t.classList.toggle('on',t.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-40% 0px -55% 0px'});
+    tabs.forEach(function(t){var el=document.querySelector(t.getAttribute('href'));if(el)io.observe(el)});
+  }
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var el=document.getElementById(b.dataset.copy),t=el.textContent;
+      function done(){b.textContent=lang==='es'?'Copiado':'Copied';setTimeout(function(){b.textContent=b.getAttribute('data-'+lang)},1500)}
+      function sel(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+      if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,sel)}else sel();
+    });
+  });
+})();
+</script>
+</body>
+</html>
