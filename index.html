@@ -93,6 +93,7 @@ html{scroll-behavior:smooth}
 </div></header>
 
 <nav class="tabs" aria-label="Sections"><div class="in">
+  <a href="#jobs" data-en="Jobs" data-es="Trabajos">Jobs</a>
   <a href="#tools" data-en="Tools" data-es="Herramientas">Tools</a>
   <a href="#discounts" data-en="Discounts" data-es="Descuentos">Discounts</a>
   <a href="#business" data-en="Business sheets" data-es="Hojas de negocio">Business sheets</a>
@@ -112,6 +113,13 @@ html{scroll-behavior:smooth}
     <li>English / Español</li>
   </ul>
 </div>
+
+<section class="sec" id="jobs">
+  <div class="sec-head"><div><h2 data-en="Jobs open for bids" data-es="Trabajos abiertos para ofertar">Jobs open for bids</h2><p data-en="Home repair jobs from Latino Built programs. See the scope, price each item, and send your bid from your phone." data-es="Trabajos de reparación de vivienda de los programas de Latino Built. Mira el alcance, pon tu precio por partida y envía tu oferta desde tu teléfono.">Home repair jobs from Latino Built programs. See the scope, price each item, and send your bid from your phone.</p></div><span class="status live" data-en="Live" data-es="Disponible">Live</span></div>
+  <a class="cta" href="https://aaronoso08.github.io/LB-Playbook/bids/" style="text-decoration:none;margin-top:0">
+    <div><strong id="jobsCount" data-en="See open jobs" data-es="Ver trabajos abiertos">See open jobs</strong><span data-en="No account needed. You get a private link to check your bid's status." data-es="No necesitas cuenta. Recibes un enlace privado para ver el estado de tu oferta.">No account needed. You get a private link to check your bid's status.</span></div>
+    <span class="go" data-en="View jobs →" data-es="Ver trabajos →">View jobs →</span></a>
+</section>
 
 <section class="sec" id="tools">
   <div class="sec-head"><div><h2 data-en="Field tools" data-es="Herramientas de campo">Field tools</h2><p data-en="Use them on the job. Your data stays on your device." data-es="Úsalas en el trabajo. Tus datos se quedan en tu dispositivo.">Use them on the job. Your data stays on your device.</p></div><span class="status live" data-en="Live" data-es="Disponible">Live</span></div>
@@ -212,6 +220,12 @@ html{scroll-behavior:smooth}
   btn.addEventListener('click',function(){setLang(lang==='en'?'es':'en')});
   var s=null;try{s=localStorage.getItem('ps-lang')}catch(e){}
   if(s==='es')setLang('es');
+  /* Live count of open bid jobs (public info only) */
+  try{fetch('https://uptrzajrneoarbchmbkp.supabase.co/rest/v1/bid_jobs?select=id&status=eq.open',{headers:{apikey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwdHJ6YWpybmVvYXJiY2htYmtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2ODk5NzgsImV4cCI6MjEwODI2NTk3OH0.aSUF-ISt18l0hjBM0aNDM-wBuFI2o5wz5p1LqqKqV7E',Authorization:'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwdHJ6YWpybmVvYXJiY2htYmtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2ODk5NzgsImV4cCI6MjEwODI2NTk3OH0.aSUF-ISt18l0hjBM0aNDM-wBuFI2o5wz5p1LqqKqV7E'}})
+    .then(function(r){return r.ok?r.json():null}).then(function(d){if(!d)return;var n=d.length,el=document.getElementById('jobsCount');
+      el.setAttribute('data-en',n?n+' job'+(n===1?'':'s')+' open now':'No open jobs right now. Check back soon.');
+      el.setAttribute('data-es',n?n+' trabajo'+(n===1?'':'s')+' abierto'+(n===1?'':'s')+' ahora':'No hay trabajos abiertos ahora. Vuelve pronto.');
+      el.textContent=el.getAttribute('data-'+lang)}).catch(function(){})}catch(e){}
   var tabs=[].slice.call(document.querySelectorAll('.tabs a'));
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){tabs.forEach(function(t){t.classList.toggle('on',t.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-40% 0px -55% 0px'});
